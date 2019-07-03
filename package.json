@@ -1,0 +1,19 @@
+{
+  "name": "baseapiapp",
+  "version": "1.0.0",
+  "description": "Base Api app",
+  "main": "server01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leogurning/baseapiapp.git"
+  },
+  "author": "Leonard Gurning",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leogurning/baseapiapp/issues"
+  },
+  "homepage": "https://github.com/leogurning/baseapiapp#readme"
+}
