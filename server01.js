@@ -14,6 +14,10 @@ const log = bunyan.createLogger({
   name: 'baseapp-server',
 });
 
+const User = require('./_routes/user.js');
+const AuthUser = require('./_routes/authUser.js');
+const UserService = require('./_services/user');
+
 const port = process.env.PORT || config.serverport;
 
 // are we tring to close down and exit the application
@@ -96,6 +100,37 @@ app.get('/', (req, res) => {
   res.send(`Base APP API is running at PORT:${port}/api`);
 });
 
+app.use('/api/user', User);
+
+// Everthing else must be authenticated, i.e we must have a token provided.
+app.use(
+  // Get and validate JWT
+  // authenticate JWT token and attach user to request object (req.user)
+  expressJwt({ secret: config.jwt_secret }),
+  // eslint-disable-next-line consistent-return
+  (req, res, next) => {
+    if (req.user) {
+      UserService.getById(req.user.name)
+        .then((user) => {
+          // loads user context from database through a cache
+          if (user && user != null) {
+            // stores user context in the express middleware request object
+            req.currentUser = user;
+            // call the next matching handler
+            next();
+          } else {
+            res.sendStatus(404);
+          }
+        })
+        .catch(err => next(err));
+    } else {
+      return res.status(403).json({ message: 'Forbidden !' });
+    }
+  },
+);
+
+app.use('/api/user', AuthUser);
+
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   if (typeof (err) === 'string') {
@@ -112,8 +147,8 @@ app.use((err, req, res, next) => {
   }
   // TODO: LBNOte had to comment this out as it was catching no existient problems
   // default to 500 server error
-  // return res.status(500).json({ message: err.message });
-  return res.end();
+  return res.status(500).json({ message: `Server Error: ${err.message}` });
+  // return res.end();
 });
 
 process.on('uncaughtException', (e) => {

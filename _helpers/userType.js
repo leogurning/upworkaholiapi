@@ -1,0 +1,6 @@
+module.exports = {
+  FREELANCER: 'FREELANCER',
+  EMPLOYER: 'EMPLOYER',
+  ADMIN: 'ADMIN',
+  SYSTEM: 'SYSTEM',
+};
