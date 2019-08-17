@@ -1,7 +1,7 @@
 {
   "name": "upworkaholiapi",
   "version": "1.0.0",
-  "description": "Base Api app",
+  "description": "Upworkaholi Api app",
   "main": "server01.js",
   "scripts": {
     "start": "node server01.js",
