@@ -1,5 +1,5 @@
 {
-  "name": "baseapiapp",
+  "name": "upworkaholiapi",
   "version": "1.0.0",
   "description": "Base Api app",
   "main": "server01.js",
@@ -34,14 +34,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leogurning/baseapiapp.git"
+    "url": "git+https://github.com/leogurning/upworkaholiapi.git"
   },
   "author": "Leonard Gurning",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/leogurning/baseapiapp/issues"
+    "url": "https://github.com/leogurning/upworkaholiapi/issues"
   },
-  "homepage": "https://github.com/leogurning/baseapiapp#readme",
+  "homepage": "https://github.com/leogurning/upworkaholiapi#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
