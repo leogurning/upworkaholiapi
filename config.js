@@ -15,5 +15,5 @@ module.exports = {
   api_key: '487496572873139',
   api_secret: 'jmvqdISXnEp_vTxOCHe8Yl47HPw',
 
-  mainUrl: 'localhost:4200',
+  mainUrl: 'upworkaholiapi.herokuapp.com',
 };
