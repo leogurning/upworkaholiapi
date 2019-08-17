@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const authorize = require('../_helpers/authorize');
 const UserController = require('../_controllers/user');
-const UserType = require('../_helpers/userType');
+// const UserType = require('../_helpers/userType');
 
 // routes
 router.get('/:userName', authorize(), UserController.getUserById); // auth route to get user account data

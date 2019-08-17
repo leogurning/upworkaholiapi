@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bunyan = require('bunyan');
 const expressJwt = require('express-jwt');
+const upload = require('express-fileupload');
 
 const app = express();
 const httpServer = require('http').Server(app);
@@ -11,12 +12,16 @@ const httpServer = require('http').Server(app);
 const config = require('./config');
 
 const log = bunyan.createLogger({
-  name: 'baseapp-server',
+  name: 'upworkaholi-server',
 });
 
 const User = require('./_routes/user.js');
 const AuthUser = require('./_routes/authUser.js');
+const Profile = require('./_routes/profile.js');
+const Freelancers = require('./_routes/freelancers.js');
+const Jobs = require('./_routes/jobs.js');
 const UserService = require('./_services/user');
+const Milestones = require('./_routes/milestones.js');
 
 const port = process.env.PORT || config.serverport;
 
@@ -72,6 +77,7 @@ mongoose.connection.on('disconnected', () => {
 
 connectToMongo();
 
+app.use(upload()); // configure middleware. This is important for parse body in multipart form data
 
 // Enable CORS from client-side
 app.use((req, res, next) => {
@@ -97,7 +103,7 @@ app.get('/healthcheck', (req, res) => res.send('System status: Ok'));
 
 // basic routes
 app.get('/', (req, res) => {
-  res.send(`Base APP API is running at PORT:${port}/api`);
+  res.send(`Upworkaholi API is running at PORT:${port}/api`);
 });
 
 app.use('/api/user', User);
@@ -130,6 +136,10 @@ app.use(
 );
 
 app.use('/api/user', AuthUser);
+app.use('/api/profile', Profile);
+app.use('/api/freelancers', Freelancers);
+app.use('/api/jobs', Jobs);
+app.use('/api/milestones', Milestones);
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
@@ -160,7 +170,7 @@ httpServer.listen(port, () => {
   log.info('listening on *:', port);
 });
 
-console.log(`Base App API Server v 1.01 is listening at PORT:${port}`);
+console.log(`Upworkaholi API Server v 1.01 is listening at PORT:${port}`);
 
 function printCommandTips() {
   console.log('Server commands: clear,cls,r,q,quit');
