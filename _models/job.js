@@ -23,6 +23,7 @@ const JobSchema = new Schema({
   worker: { type: String },
   workerRating: { type: Number },
   clientRating: { type: Number },
+  cancelReason: { type: String },
 });
 
 module.exports = mongoose.model('jobs', JobSchema, 'jobs');

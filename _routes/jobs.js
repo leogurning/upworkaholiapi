@@ -18,5 +18,6 @@ router.put('/start', authorize(UserType.EMPLOYER), jobsController.startJob); // 
 router.get('/searchafterstart', authorize(), jobsController.getAfterStartJobsAggregate); // auth route to get After start Joblist Aggregate with employer
 router.put('/setclientrating', authorize(UserType.FREELANCER), jobsController.setClientRating); // auth route to SET Client Rating
 router.put('/complete', authorize(UserType.EMPLOYER), jobsController.completeJob); // auth route to complete the job
+router.put('/cancel', authorize(UserType.EMPLOYER), jobsController.clientCancelJob); // auth route to cancel the job
 
 module.exports = router;

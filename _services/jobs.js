@@ -770,6 +770,27 @@ class JobsService {
       throw error;
     }
   }
+
+  static async clientCancelJob({ jobId, remarks }) {
+    if (!jobId) {
+      return false;
+    }
+    try {
+      const currentDate = moment.utc().toDate();
+      // Edit the job doc
+      const jobObject = {
+        status: constant.jobStatus.CANC,
+        cancelReason: remarks,
+        lastModifiedDate: currentDate,
+      };
+
+      const resultUpdate = await JobModel.findByIdAndUpdate(jobId, jobObject);
+      if (resultUpdate) return resultUpdate;
+      return null;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = JobsService;

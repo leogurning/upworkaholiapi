@@ -219,6 +219,24 @@ class jobsController {
       })
       .catch(err => next(err));
   }
+
+  // Cancel the job
+  static clientCancelJob(req, res, next) {
+    // Call cancel job service
+    jobsService.clientCancelJob(req.body)
+      .then((job) => {
+        if (job && job != null) {
+          res.json(job);
+        } else if (job == null) {
+          res.status(404).json({ message: 'Error: Cancel job failed.' });
+        } else if (job === false) {
+          res.status(400).json({ message: 'Input parameters is incorrect OR incomplete.' });
+        } else {
+          res.status(404).json({ message: 'Unknown error when saving job.' });
+        }
+      })
+      .catch(err => next(err));
+  }
 }
 
 module.exports = jobsController;
