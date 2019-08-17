@@ -4,7 +4,7 @@
   "description": "Base Api app",
   "main": "server01.js",
   "scripts": {
-    "start": "nodemon server01.js",
+    "start": "node server01.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
